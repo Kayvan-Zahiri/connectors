@@ -4,6 +4,7 @@ import (
 	"sort"
 
 	"github.com/amp-labs/connectors/common"
+	"github.com/amp-labs/connectors/internal/datautils"
 )
 
 // Relationship kinds in xClarifyRelationship. A many-to-one or one-to-one relationship is a foreign
@@ -80,6 +81,13 @@ func (p propertySchema) fieldMetadata(name string) common.FieldMetadata {
 
 	if relationship := p.XClarifyRelationship; relationship != nil {
 		field.ProviderType = relationship.Kind
+
+		if actorFields.Has(name) {
+			field.ValueType = common.ValueTypeString
+
+			return field
+		}
+
 		field.ValueType = relationship.valueType()
 
 		if target := readableObjectName(relationship.Entity); target != "" {
@@ -94,11 +102,16 @@ func (p propertySchema) fieldMetadata(name string) common.FieldMetadata {
 	return field
 }
 
+// actorFields name who changed a record. The schema links them to users, but their values are
+// opaque actor ids: a user's id from the workspace's auth provider (google-oauth2|...) or a system
+// actor (system, agent, rep), neither of which is the users object's id (user_01...). Live records
+// hold "system". So they are plain strings, not references.
+// https://developer.clarify.ai/docs/guides/schemas-and-relationships#user-identifiers
+var actorFields = datautils.NewSet("_created_by", "_updated_by", "_deleted_by") // nolint:gochecknoglobals
+
 // valueType types a relationship field by what Read returns: a to-one relationship is the related
 // record's id, a lookup when the connector reads the target and a plain id otherwise; a to-many one
-// is a list of ids. The actor fields (_created_by, _updated_by) point at users but can also hold a
-// system actor such as "system", which is not a user id.
-// https://developer.clarify.ai/docs/guides/schemas-and-relationships#user-identifiers
+// is a list of ids.
 func (r relationshipSchema) valueType() common.ValueType {
 	switch {
 	case r.isToMany():

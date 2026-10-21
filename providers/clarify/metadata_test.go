@@ -68,10 +68,9 @@ func TestListObjectMetadata(t *testing.T) { // nolint:funlen
 							},
 							"_created_by": {
 								DisplayName:  "Created by",
-								ValueType:    common.ValueTypeReference,
+								ValueType:    common.ValueTypeString,
 								ProviderType: "many-to-one",
 								ReadOnly:     new(true),
-								ReferenceTo:  []string{"users"},
 							},
 							"_updated_at": {
 								DisplayName:  "Updated at",

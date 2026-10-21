@@ -19,6 +19,8 @@ type Connector struct {
 
 	// workspace is the workspace slug every API path is scoped to: /v1/workspaces/{workspace}/...
 	workspace string
+
+	schemaCache *schemaCache
 }
 
 func NewConnector(params common.ConnectorParams) (*Connector, error) {
@@ -27,8 +29,9 @@ func NewConnector(params common.ConnectorParams) (*Connector, error) {
 
 func constructor(params common.ConnectorParams, base *components.Connector) (*Connector, error) {
 	connector := &Connector{
-		Connector: base,
-		workspace: params.Workspace,
+		Connector:   base,
+		workspace:   params.Workspace,
+		schemaCache: &schemaCache{},
 	}
 
 	registry, err := components.NewEndpointRegistry(supportedOperations())

@@ -26,9 +26,13 @@ artifacts sit under per-meeting paths, so neither is an object here.
 Read promotes each resource's `attributes` to top-level fields, named as `/schemas` names them.
 The resource `type` (the object name) is dropped, as meetings have a `type` attribute of their own.
 Many-to-one relationships are attributes (`company_id`). One-to-many and many-to-many relationships
-(a deal's `people`, a meeting's `users`, a person's `deals`) are not: when one is among the requested
-fields, the connector reads `/schemas` and asks for it with `include`, and Read returns it as a list
-of ids. `Raw` is the resource untouched.
+(a deal's `people`, a meeting's `users`, a person's `deals`) are not: they are asked for with
+`include`, and Read returns each as a list of ids. Only `/schemas` says which requested fields are
+such relationships, so the first page of every record-object read needs `/schemas` (about 240 KB
+in the test workspace), even when no `include` results; the connector reads it once per instance and
+shares it with `ListObjectMetadata`. If `/schemas` fails, the read fails. `_created_by` and
+`_updated_by` are opaque actor ids (`system`, or a user's auth-provider id), so they are strings,
+not references to `users`. `Raw` is the resource untouched.
 
 ## Pagination
 

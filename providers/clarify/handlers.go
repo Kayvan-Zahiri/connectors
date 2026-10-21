@@ -125,7 +125,10 @@ func (c *Connector) resourcesURL(ctx context.Context, params common.ReadParams) 
 }
 
 // requestedRelationships returns the requested fields that the object's schema marks as one-to-many
-// or many-to-many relationships. It reads GET /schemas once per read; later pages reuse the include.
+// or many-to-many relationships. Which requested fields those are is only known from the schema, so
+// every first page of a record object needs GET /schemas, whether or not it ends up sending include.
+// The connector reads it once and reuses it (see schemaCache); later pages carry the include in
+// their URL. A failed /schemas fails the read rather than silently dropping requested relationships.
 func (c *Connector) requestedRelationships(ctx context.Context, params common.ReadParams) ([]string, error) {
 	schemas, err := c.fetchSchemas(ctx)
 	if err != nil {

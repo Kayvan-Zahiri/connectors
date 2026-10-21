@@ -4,9 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/url"
 	"strings"
+	"sync"
 
 	"github.com/amp-labs/connectors/common"
+	"github.com/amp-labs/connectors/common/urlbuilder"
 	"github.com/amp-labs/connectors/internal/datautils"
 	"github.com/amp-labs/connectors/providers/clarify/internal/metadata"
 )
@@ -76,9 +79,36 @@ func (c *Connector) describeRecordObjects(
 	}
 }
 
-// fetchSchemas reads every schema in the workspace, following links.next, and keys the object
-// schemas (`.../entities/{object}`) by object name. The `.../core/*` base definitions are skipped.
+// schemaCache keeps the workspace schemas a connector instance has read, so ListObjectMetadata and
+// every first page of a read share one GET /schemas (about 240 KB in the test workspace).
+// A failed fetch is not cached.
+type schemaCache struct {
+	mutex   sync.Mutex
+	schemas map[string]entitySchema
+}
+
+// fetchSchemas returns the workspace's object schemas, reading them on first use.
 func (c *Connector) fetchSchemas(ctx context.Context) (map[string]entitySchema, error) {
+	c.schemaCache.mutex.Lock()
+	defer c.schemaCache.mutex.Unlock()
+
+	if c.schemaCache.schemas != nil {
+		return c.schemaCache.schemas, nil
+	}
+
+	schemas, err := c.readSchemas(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	c.schemaCache.schemas = schemas
+
+	return schemas, nil
+}
+
+// readSchemas reads every schema in the workspace, following links.next, and keys the object
+// schemas (`.../entities/{object}`) by object name. The `.../core/*` base definitions are skipped.
+func (c *Connector) readSchemas(ctx context.Context) (map[string]entitySchema, error) {
 	schemasURL, err := c.workspaceURL("schemas")
 	if err != nil {
 		return nil, err
@@ -110,11 +140,34 @@ func (c *Connector) fetchSchemas(ctx context.Context) (map[string]entitySchema, 
 
 		nextURL = ""
 		if page.Links.Next != nil {
-			nextURL = *page.Links.Next
+			nextURL, err = onOrigin(*page.Links.Next, schemasURL)
+			if err != nil {
+				return nil, err
+			}
 		}
 	}
 
 	return schemas, nil
+}
+
+// onOrigin moves a links.next URL onto the connector's own scheme and host, keeping its path and
+// query. Clarify returns these links as http://api.clarify.ai/..., which does not answer (seen on
+// resource lists in the live test); see makeNextPageFunc.
+func onOrigin(link string, origin *urlbuilder.URL) (string, error) {
+	next, err := url.Parse(link)
+	if err != nil {
+		return "", err
+	}
+
+	base, err := origin.ToURL()
+	if err != nil {
+		return "", err
+	}
+
+	next.Scheme = base.Scheme
+	next.Host = base.Host
+
+	return next.String(), nil
 }
 
 const entitySchemaPathPrefix = "/schemas/entities/"
