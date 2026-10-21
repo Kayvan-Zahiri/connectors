@@ -20,6 +20,8 @@ func TestRead(t *testing.T) { //nolint:funlen
 	responseConversationsEmpty := testutils.DataFromFile(t, "conversations-empty.json")
 	responseDealsEmpty := testutils.DataFromFile(t, "deals-empty.json")
 	responseAccountsEmpty := testutils.DataFromFile(t, "accounts-empty.json")
+	// The live 404 body of GET /v1/conversations/{conversationId} for an unknown id.
+	responseNotFound := testutils.DataFromFile(t, "error-not-found.json")
 
 	tests := []testconn.TestCaseRead{
 		{
@@ -39,6 +41,19 @@ func TestRead(t *testing.T) { //nolint:funlen
 			Input:        common.ReadParams{ObjectName: "messages", Fields: connectors.Fields("messageId")},
 			Server:       mockserver.Dummy(),
 			ExpectedErrs: []error{common.ErrOperationNotSupportedForObject},
+		},
+		{
+			Name:  "Provider error body is mapped to its status and detail message",
+			Input: common.ReadParams{ObjectName: "conversations", Fields: connectors.Fields("conversationId")},
+			Server: mockserver.Fixed{
+				Setup:  mockserver.ContentJSON(),
+				Always: mockserver.Response(http.StatusNotFound, responseNotFound),
+			}.Server(),
+			ExpectedErrs: []error{
+				common.ErrNotFound,
+				// Only a matched {"detail"} format renders this; the fallback dumps the raw body instead.
+				testutils.StringError("not found: Conversation not found"),
+			},
 		},
 		{
 			Name: "Conversations honour the page size and stop when hasMore is false",
