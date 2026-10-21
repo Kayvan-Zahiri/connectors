@@ -1,0 +1,55 @@
+{
+  "users": {
+    "path": "/workspaces/{workspace}/users",
+    "displayName": "Users",
+    "fields": {
+      "_created_at": {
+        "displayName": "Created At",
+        "valueType": "datetime"
+      },
+      "_id": {
+        "displayName": "Id",
+        "valueType": "string",
+        "providerType": "string"
+      },
+      "_updated_at": {
+        "displayName": "Updated At",
+        "valueType": "datetime"
+      },
+      "email": {
+        "displayName": "Email",
+        "valueType": "string",
+        "providerType": "string"
+      },
+      "id": {
+        "displayName": "Id",
+        "valueType": "string",
+        "providerType": "string"
+      },
+      "is_service_account": {
+        "displayName": "Is Service Account",
+        "valueType": "boolean",
+        "providerType": "boolean"
+      },
+      "last_active_at": {
+        "displayName": "Last Active At",
+        "valueType": "datetime"
+      },
+      "name": {
+        "displayName": "Name",
+        "valueType": "other",
+        "providerType": "object"
+      },
+      "profile_picture": {
+        "displayName": "Profile Picture",
+        "valueType": "string",
+        "providerType": "string"
+      },
+      "roles": {
+        "displayName": "Roles",
+        "valueType": "other",
+        "providerType": "object"
+      }
+    }
+  }
+}

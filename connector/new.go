@@ -40,6 +40,7 @@ import (
 	"github.com/amp-labs/connectors/providers/chilipiper"
 	"github.com/amp-labs/connectors/providers/chorus"
 	"github.com/amp-labs/connectors/providers/claricopilot"
+	"github.com/amp-labs/connectors/providers/clarify"
 	"github.com/amp-labs/connectors/providers/clickup"
 	"github.com/amp-labs/connectors/providers/closecrm"
 	"github.com/amp-labs/connectors/providers/cloudtalk"
@@ -201,6 +202,7 @@ var connectorConstructors = map[providers.Provider]outputConstructorFunc{ // nol
 	providers.ChiliPiper:                        wrapper(newChiliPiperConnector),
 	providers.Chorus:                            wrapper(newChorusConnector),
 	providers.ClariCopilot:                      wrapper(newClariCopilotConnector),
+	providers.Clarify:                           wrapper(newClarifyConnector),
 	providers.ClickUp:                           wrapper(newClickUpConnector),
 	providers.Close:                             wrapper(newCloseConnector),
 	providers.CloudTalk:                         wrapper(newCloudTalkConnector),
@@ -680,6 +682,12 @@ func newClariCopilotConnector(
 	params common.ConnectorParams,
 ) (*claricopilot.Connector, error) {
 	return claricopilot.NewConnector(params)
+}
+
+func newClarifyConnector(
+	params common.ConnectorParams,
+) (*clarify.Connector, error) {
+	return clarify.NewConnector(params)
 }
 
 func newCloseConnector(
