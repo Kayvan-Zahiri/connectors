@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "id": "user_01K0CTE7EWH9CRGQDF1SV7AXX6",
+      "type": "user",
+      "attributes": {
+        "_id": "user_01K0CTE7EWH9CRGQDF1SV7AXX6",
+        "name": {
+          "full_name": "Rajat Pawar",
+          "last_name": "Pawar",
+          "first_name": "Rajat"
+        },
+        "email": "rajat@withampersand.com",
+        "roles": {
+          "items": [
+            "admin"
+          ]
+        },
+        "_created_at": "2026-10-21T06:41:43.986Z",
+        "_updated_at": "2026-10-21T06:41:44.421Z",
+        "last_active_at": "2026-10-21T06:41:46.022Z",
+        "profile_picture": "https://workoscdn.com/images/v1/bU938xRdOlkT-VxLsb57aEYSpJew2DADhRoRPFRiLQ4",
+        "is_service_account": false
+      }
+    }
+  ],
+  "meta": {
+    "limit": 2,
+    "offset": 0,
+    "total_pages": 1,
+    "total_records": 1
+  },
+  "links": {
+    "next": null,
+    "prev": null
+  }
+}

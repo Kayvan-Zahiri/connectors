@@ -1,0 +1,279 @@
+{
+  "data": [
+    {
+      "id": "1ce3d348-0186-4584-b4a8-cd15d807e8fb",
+      "type": "task",
+      "attributes": {
+        "_id": "1ce3d348-0186-4584-b4a8-cd15d807e8fb",
+        "title": "Download the desktop app",
+        "status": "To Do",
+        "deal_id": null,
+        "due_date": "2026-10-21",
+        "priority": "Low",
+        "person_id": null,
+        "company_id": null,
+        "meeting_id": null,
+        "_created_at": "2026-10-21T06:42:47.281Z",
+        "_created_by": "system",
+        "_updated_at": "2026-10-21T06:42:47.281Z",
+        "_updated_by": "system",
+        "assignee_id": "user_01K0CTE7EWH9CRGQDF1SV7AXX6",
+        "description": {
+          "text": [
+            {
+              "id": "ed37b668-aea9-4f1a-9e3d-3d4c51417031",
+              "type": "paragraph",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "Stay in flow with a faster, distraction-free way to work.",
+                  "type": "text",
+                  "styles": {
+                    "italic": true
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "3ee6c698-1c7e-42fd-969b-7cc27d60dfe8",
+              "type": "paragraph",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "href": "https://www.clarify.ai/desktop",
+                  "type": "link",
+                  "content": [
+                    {
+                      "text": "Download the desktop app",
+                      "type": "text",
+                      "styles": {}
+                    }
+                  ]
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      },
+      "relationships": {}
+    },
+    {
+      "id": "4f7ab923-fbc4-4e84-b8d0-1b1f3b34a1ec",
+      "type": "task",
+      "attributes": {
+        "_id": "4f7ab923-fbc4-4e84-b8d0-1b1f3b34a1ec",
+        "title": "Use Ask for Meetings and Deals",
+        "status": "To Do",
+        "deal_id": null,
+        "due_date": "2026-10-22",
+        "priority": "Low",
+        "person_id": null,
+        "company_id": null,
+        "meeting_id": null,
+        "_created_at": "2026-10-21T06:42:47.281Z",
+        "_created_by": "system",
+        "_updated_at": "2026-10-21T06:42:47.281Z",
+        "_updated_by": "system",
+        "assignee_id": "user_01K0CTE7EWH9CRGQDF1SV7AXX6",
+        "description": {
+          "text": [
+            {
+              "id": "857e1c3b-4f8c-46d6-9bb6-92b1374503d2",
+              "type": "paragraph",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "Get instant answers and insights with Meeting and Deal Intelligence.",
+                  "type": "text",
+                  "styles": {
+                    "italic": true
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "ae83b4b2-271a-4178-b9cb-fd82683c6178",
+              "type": "paragraph",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "After recording a call and adding a deal, you can use Ask for Meetings and Deals to get instant answers and insights with AI-powered assistance.",
+                  "type": "text",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "b7086217-3afc-4ed7-a0d6-536d75f7af94",
+              "type": "paragraph",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "You can ask things like:",
+                  "type": "text",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "c678e415-9770-4f47-9961-fa6337793b24",
+              "type": "bulletListItem",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "Draft me a follow-up email",
+                  "type": "text",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "0e647e27-5460-4d21-a95d-390c8b48335c",
+              "type": "bulletListItem",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "What were the key takeaways from this meeting?",
+                  "type": "text",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "8f4766bf-c638-45c8-9fd1-abf83d742350",
+              "type": "bulletListItem",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "What action items were discussed?",
+                  "type": "text",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "88ce35bf-af22-4cee-90fd-5d5aafe480ea",
+              "type": "bulletListItem",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "What is the current status of this deal?",
+                  "type": "text",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "d337764a-1fec-4f6f-8337-2c82b0067179",
+              "type": "bulletListItem",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "What are the next steps to close this deal?",
+                  "type": "text",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "598cfad9-1d10-4749-bc92-207135c71d40",
+              "type": "bulletListItem",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "What is the expected close date and value?",
+                  "type": "text",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "eef763ba-8f75-4195-95a7-d9e20054028e",
+              "type": "bulletListItem",
+              "props": {
+                "textColor": "default",
+                "textAlignment": "left",
+                "backgroundColor": "default"
+              },
+              "content": [
+                {
+                  "text": "What are the main risks or blockers?",
+                  "type": "text",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      },
+      "relationships": {}
+    }
+  ],
+  "meta": {
+    "limit": 2,
+    "offset": 0,
+    "total_pages": 4,
+    "total_records": 7
+  },
+  "links": {
+    "next": "http://api.clarify.ai/v1/workspaces/test-integration-workspace/objects/task/resources?page%5Boffset%5D=2&page%5Blimit%5D=2",
+    "prev": null
+  },
+  "included": []
+}
