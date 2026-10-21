@@ -27,10 +27,11 @@ const (
 	// and has no updated-at filter or field. A meeting shows up, and its transcript, summary and
 	// recordings fill in, only after it has been recorded and processed, which can be hours after
 	// it started. A read starting exactly at Since would miss every meeting that started before the
-	// previous read but was not processed yet, so Since is moved back by this window and recent
-	// meetings are read again on each incremental read, with whatever content is ready by then.
-	// The ingest API caps a meeting at 10 hours (ConversationRequest.endedAt), so a day covers a
-	// long meeting plus its processing.
+	// previous read but was not processed yet, so Since is widened by this window: each incremental
+	// read returns again every meeting that started in the 24 hours before Since, with whatever
+	// content is ready by then. The docs give no processing latency or meeting-length limit for
+	// natively recorded meetings (the 10-hour cap on ConversationRequest.endedAt applies only to
+	// meetings pushed through POST /v1/conversations), so a day is a judgement, not a documented bound.
 	// https://api.sybill.ai/docs/endpoints.html#conversations
 	conversationsLookback = 24 * time.Hour
 )
